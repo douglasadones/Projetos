@@ -1,2 +1,2 @@
-# ProjetosPython
- Projetos Para Estudos
+# PythonProjects
+ Projects for Study
