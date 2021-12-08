@@ -1,3 +1,0 @@
-Jose;35
-Gustavo;42
-Douglas;23
