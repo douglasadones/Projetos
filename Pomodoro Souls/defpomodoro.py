@@ -1,9 +1,11 @@
 from pygame import mixer
+from random import randint
+from PIL import Image
 
 
-def playmusic():
+def playmusic(msg):
     mixer.init()
-    mixer.music.load('BF.mp3')
+    mixer.music.load(msg)
     mixer.music.play()
     mixer.music.set_volume(0.9)
 
@@ -28,3 +30,9 @@ def validaçãostr(parametro, msg):
         except:
             print('Hm....')
     return parametro
+
+
+def imagem(a, b):
+    n = randint(a, b)
+    im = Image.open(f'img{n}.jpg')
+    im.show()
