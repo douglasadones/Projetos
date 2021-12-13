@@ -37,7 +37,7 @@ while True:
         r = ' '
         rr = ' '
         while c <= ciclos:
-            playmusic('BF.mp3')
+            playmusic()
             if ativo != 0:
                 print('Pomodoro ativo...')
                 imagem(1, 7)  # fight
@@ -49,7 +49,7 @@ while True:
                 else:
                     print(f'Contagem de Ciclos: Ciclo único.')
                 sleep(ativo * 60)
-                playmusic('BF.mp3')
+                playmusic()
 
 
             # Para o uso padrão de um Pomodoro (ativo + descanso)
@@ -66,7 +66,6 @@ while True:
                 if ciclos != c:
                     sleep(descanso * 60)
 
-
             # Caso o tenha apenas o tempo de descanso
             if descanso != 0 and ativo == 0:
                 print('Pomodoro para descanso...')
@@ -80,7 +79,7 @@ while True:
                         print(f'Contagem de Ciclos: Ciclo único.')
                 sleep(descanso * 60)
             c += 1
-        playmusic('VG.mp3')
+        playmusic()
         if imag == 'S':
             im = Image.open(f'fim.jpg')  # Fim
             im.show()

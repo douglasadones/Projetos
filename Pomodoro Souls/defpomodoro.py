@@ -1,9 +1,9 @@
 from pygame import mixer
 
 
-def playmusic(msg):
+def playmusic():
     mixer.init()
-    mixer.music.load(msg)
+    mixer.music.load('BF.mp3')
     mixer.music.play()
     mixer.music.set_volume(0.9)
 
