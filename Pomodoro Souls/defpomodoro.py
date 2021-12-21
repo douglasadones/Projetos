@@ -1,5 +1,4 @@
 from pygame import mixer
-from random import randint
 
 
 def playmusic(msg):
