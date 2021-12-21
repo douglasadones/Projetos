@@ -1,15 +1,5 @@
 from defpomodoro import *
 from time import sleep
-from PIL import Image
-from random import randint
-
-
-def imagem(a, b):
-    if imag == 'S':
-        n = randint(a, b)
-        im = Image.open(f'img{n}.jpg')
-        im.show()
-
 
 # Programa Principal
 print('*' * 50)
@@ -40,7 +30,8 @@ while True:
             playmusic('BF.mp3')
             if ativo != 0:
                 print('Pomodoro ativo...')
-                imagem(1, 7)  # fight
+                if imag == 'S':
+                    imagem(1, 7)  # fight
                 if ciclos != 1:
                     if ciclos == c:
                         print(f'Contagem de ciclos: {c}° e último ciclo.')
@@ -55,7 +46,8 @@ while True:
             # Para o uso padrão de um Pomodoro (ativo + descanso)
             if descanso != 0 and ciclos != c and ciclos != 1 and ativo != 0:
                 print('Pomodoro para descanso...')
-                imagem(8, 12)  # bonfire
+                if imag == 'S':
+                    imagem(8, 12)  # bonfire
                 if ciclos != 1:
                     if c + 1 == ciclos:
                         print(f'Contagem de Repetições: Preparando para o {c + 1}° e último ciclo.')
@@ -93,4 +85,4 @@ while True:
             rr = validaçãostr(rr, 'Deseja manter os mesmos parâmetros? [S/N] ')
     if r == 'N':
         break
-print('Programa finalizado!')
+print('Programa finalizado.')
