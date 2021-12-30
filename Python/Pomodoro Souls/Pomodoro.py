@@ -6,7 +6,6 @@ print('*' * 50)
 print(f'{"POMODORO SOULS":^50}')
 print('*' * 50)
 
-
 # Solicitação de informações + Sistema Anti-Erro
 while True:
     ativo = descanso = ciclos = -1
@@ -19,7 +18,6 @@ while True:
     imag = validaçãostr(imag, 'Deseja ativar os alertas de imagem? [S/N] ')
     if ciclos == 0:
         ciclos = 1
-
 
 # Execução do Programa com Base Nas Informações Solicitadas.
     while rr == 'S':
@@ -42,7 +40,6 @@ while True:
                 sleep(ativo * 60)
                 playmusic('BF.mp3')
 
-
             # Para o uso padrão de um Pomodoro (ativo + descanso)
             if descanso != 0 and ciclos != c and ciclos != 1 and ativo != 0:
                 print('Pomodoro para descanso...')
@@ -57,7 +54,6 @@ while True:
                     print(f'Contagem de Ciclos: Ciclo único.')
                 if ciclos != c:
                     sleep(descanso * 60)
-
 
             # Caso o tenha apenas o tempo de descanso
             if descanso != 0 and ativo == 0:
@@ -77,7 +73,6 @@ while True:
             im = Image.open(f'fim.jpg')  # Fim
             im.show()
         print('Pomodoro Concluído!')
-
 
 # Solicitação de Informações para Encerramento / Repetição do Programa.
         r = validaçãostr(r, 'Deseja iniciar novamente? [S/N] ')
