@@ -56,6 +56,16 @@ def using_resources():
     resources["coffee"] -= MENU[order]["ingredients"]["coffee"]
 
 
+def validating_int_input(ask):
+    while True:
+        try:
+            currency = int(input(ask))
+        except ValueError:
+            print("insert a valid currency")
+        else:
+            return currency
+
+
 def ckeking_money():
     """Make sure you have enough money and pay it out, if necessary returning True or False"""
     if payment < MENU[order]["cost"]:
@@ -93,10 +103,10 @@ while order != "off":
             maked_order = cheking_resources()
             if maked_order:
                 # TODO: 4. Ask separately how many quarters, dimes, nickles and pennies.
-                quaters = int(input("how many quaters? "))
-                dimes = int(input("how many dimes? "))
-                nickles = int(input("how many nickles? "))
-                pennies = int(input("how many pennies? "))
+                quaters = validating_int_input("how many quaters? ")
+                dimes = validating_int_input("how many dimes? ")
+                nickles = validating_int_input("how many nickles? ")
+                pennies = validating_int_input("how many pennies? ")
                 # TODO: 5. Add it all up and check if you have enough money for the order
                 payment = (0.25 * quaters) + (0.10 * dimes) + (0.05 * nickles) + (0.01 * pennies)
                 maked_order = ckeking_money()
