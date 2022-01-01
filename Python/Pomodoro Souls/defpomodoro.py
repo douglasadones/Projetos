@@ -10,24 +10,24 @@ def playmusic(msg):
     mixer.music.set_volume(0.9)
 
 
-def validaçãoint(parametro, msg):
+def tratando_erros_int(parametro, msg):
     while parametro < 0:
         try:
             parametro = int(input(msg))
             if parametro < 0:
                 print('Hm...')
-        except:
+        except ValueError:
             print('Hm....')
     return parametro
 
 
-def validaçãostr(parametro, msg):
+def tratando_erros_str(parametro, msg):
     while parametro not in 'SN':
         try:
             parametro = str(input(msg)).strip().upper()[0]
             if parametro not in 'SN':
                 print('Hm...')
-        except:
+        except ValueError:
             print('Hm....')
     return parametro
 

@@ -2,37 +2,54 @@ from defpomodoro import *
 from time import sleep
 
 # Programa Principal
-print('*' * 50)
-print(f'{"POMODORO SOULS":^50}')
-print('*' * 50)
+print('*' * 53)
+print(f'{"POMODORO SOULS":^53}')
+print('*' * 53)
 
 # Solicitação de informações + Sistema Anti-Erro
 while True:
     ativo = descanso = ciclos = -1
-    r = ' '
-    rr = 'S'
-    imag = ' '
-    ativo = validaçãoint(ativo, 'Informe o Tempo ativo (em minutos): ')
-    descanso = validaçãoint(descanso, 'Informe o Tempo de descanso (em minutos):  ')
-    ciclos = validaçãoint(ciclos, 'Quantos ciclos? ')
-    imag = validaçãostr(imag, 'Deseja ativar os alertas de imagem? [S/N] ')
+    loop = predefinido = imag = ' '
+    manter_parametros = 'S'
+    print(f"""{'Pomodoros Pré-definidos':^53}
+[1] - Curto: 25min ativo + 05min descanso, 2 Ciclos
+      Tempo Total: 1h
+[2] - Padrão: 25min ativo + 05min descanso, 4 Ciclos 
+      Tempo Total: 2h
+[3] - Personalizado""")
+    while predefinido not in "123":
+        try:
+            predefinido = str(input("Faça sua escolha, esqueleto: ")).strip()[0]
+            if predefinido not in "123":
+                print("hm...")
+        except IndexError:
+            print("hm...")
+    if predefinido == "1":
+        ativo, descanso, ciclos = 25, 5, 2
+    elif predefinido == "2":
+        ativo, descanso, ciclos = 25, 5, 4
+    else:
+        ativo = tratando_erros_int(ativo, "Informe o Tempo ativo (em minutos): ")
+        descanso = tratando_erros_int(descanso, "Informe o Tempo de descanso (em minutos):  ")
+        ciclos = tratando_erros_int(ciclos, "Quantos ciclos? ")
+    imag = tratando_erros_str(imag, "Deseja ativar os alertas de imagem? [S/N] ")
     if ciclos == 0:
         ciclos = 1
 
 # Execução do Programa com Base Nas Informações Solicitadas.
-    while rr == 'S':
+    while manter_parametros == "S":
         c = 1
-        r = ' '
-        rr = ' '
+        loop = " "
+        manter_parametros = " "
         while c <= ciclos:
-            playmusic('BF.mp3')
+            playmusic("BF.mp3")
             if ativo != 0:
-                print('Pomodoro ativo...')
-                if imag == 'S':
+                print("Pomodoro ativo...")
+                if imag == "S":
                     imagem(1, 7)  # fight
                 if ciclos != 1:
                     if ciclos == c:
-                        print(f'Contagem de ciclos: {c}° e último ciclo.')
+                        print(f"Contagem de ciclos: {c}° e último ciclo.")
                     else:
                         print(f'Contagem de repetições: {c}º Ciclo.')
                 else:
@@ -75,9 +92,9 @@ while True:
         print('Pomodoro Concluído!')
 
 # Solicitação de Informações para Encerramento / Repetição do Programa.
-        r = validaçãostr(r, 'Deseja iniciar novamente? [S/N] ')
-        if r == 'S':
-            rr = validaçãostr(rr, 'Deseja manter os mesmos parâmetros? [S/N] ')
-    if r == 'N':
+        loop = tratando_erros_str(loop, 'Deseja iniciar novamente? [S/N] ')
+        if loop == 'S':
+            manter_parametros = tratando_erros_str(manter_parametros, 'Deseja manter os mesmos parâmetros? [S/N] ')
+    if loop == 'N':
         break
-print('Programa finalizado.')
+print("Don't give up, skeleton!")
