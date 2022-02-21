@@ -29,6 +29,13 @@ class Snake:
         # adiciona um novo segmento para a cobra na mesma posição do último segmento
         self.add_segment(self.segments[-1].position())
 
+    def reset(self):
+        for seg in self.segments:
+            seg.goto(1000, 1000)
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
+
     def move(self):
         for seg_num in range(len(self.segments) - 1, 0, -1):  # Isso vai garantir que se a cabeça for para um lado,
             new_x = self.segments[seg_num - 1].xcor()   # o corpo irá segui-la. Aqui o movimento da cobra foi invertido,

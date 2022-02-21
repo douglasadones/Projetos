@@ -4,7 +4,6 @@ from time import sleep
 from food import Food
 from scoreboard import Scoreboard
 
-
 screen = Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor("black")
@@ -15,12 +14,11 @@ snake = Snake()
 food = Food()
 scoreboard = Scoreboard()
 
-screen.listen()   # inicia o método para reconhecimento de teclas
+screen.listen()  # inicia o método para reconhecimento de teclas
 screen.onkey(snake.up, "Up")
 screen.onkey(snake.down, "Down")
 screen.onkey(snake.left, "Left")
-screen.onkey(snake. right, "Right")
-
+screen.onkey(snake.right, "Right")
 
 game_is_on = True
 while game_is_on:
@@ -36,13 +34,13 @@ while game_is_on:
 
     # Detectando colisão com a parede
     if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
-        game_is_on = False
-        scoreboard.game_over()
+        scoreboard.reset()
+        snake.reset()
 
     # Detectando colisão com a cauda
     for segment in snake.segments[1:]:  # o [1:] exclui a cabeça da cobra.
         if snake.head.distance(segment) < 10:
-            game_is_on = False
-            scoreboard.game_over()
+            scoreboard.reset()
+            snake.reset()
 
 screen.exitonclick()
