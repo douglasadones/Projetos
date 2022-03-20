@@ -1,124 +1,128 @@
-# Tentando em  inglês aqui :D
-# Penny = 0.01, Nickel = 0.05, Dime = 0.10, Quarter 0.25
 MENU = {
     "espresso": {
-        "ingredients": {
-            "water": 50,
-            "coffee": 18,
+        "ingredientes": {
+            "água": 50,
+            "café": 18,
         },
-        "cost": 1.5,
+        "custo": 1.5,
     },
     "latte": {
-        "ingredients": {
-            "water": 200,
-            "milk": 150,
-            "coffee": 24,
+        "ingredientes": {
+            "água": 200,
+            "leite": 150,
+            "café": 24,
         },
-        "cost": 2.5,
+        "custo": 2.5,
     },
     "cappuccino": {
-        "ingredients": {
-            "water": 250,
-            "milk": 100,
-            "coffee": 24,
+        "ingredientes": {
+            "água": 250,
+            "leite": 100,
+            "café": 24,
         },
-        "cost": 3.0,
+        "custo": 3.0,
     }
 }
 
-resources = {
-    "water": 300,
-    "milk": 200,
-    "coffee": 100,
+recursos = {
+    "água": 300,
+    "leite": 200,
+    "café": 100,
 }
 
 
-def cheking_resources():
-    """check if there are still resources returning True or False"""
-    resouce = ''
-    for current_resources, necessary_resources in MENU[order]["ingredients"].items():
-        if resources[current_resources] < necessary_resources:
-            resouce = current_resources
+def checando_recursos():
+    """Verifica se ainda há recursos retornando True ou False com um print caso seja False."""
+    recurso = ""
+    for recursos_atuais, recursos_necessarios in MENU[pedido]["ingredientes"].items():
+        if recursos[recursos_atuais] < recursos_necessarios:
+            recurso = recursos_atuais
             break
-    if len(resouce) != 0:
-        print(f"Sorry there is not enough {resouce}.")
+    if len(recurso) != 0:
+        print(f"Desculpe, não há {recurso} o suficiente.")
         return False
     else:
         return True
 
 
-def using_resources():
-    """uses the resources"""
-    # Utilizando recursos
-    resources["water"] -= MENU[order]["ingredients"]["water"]
-    if order != "espresso":
-        resources["milk"] -= MENU[order]["ingredients"]["milk"]
-    resources["coffee"] -= MENU[order]["ingredients"]["coffee"]
+def usando_recursos():
+    """Usa os recursos conforme o pedido."""
+    recursos["água"] -= MENU[pedido]["ingredientes"]["água"]
+    if pedido != "espresso":
+        recursos["leite"] -= MENU[pedido]["ingredientes"]["leite"]
+    recursos["café"] -= MENU[pedido]["ingredientes"]["café"]
 
 
-def validating_int_input(ask):
+def verificador_de_entrada_int(pergunta):
+    """Verifica se a moeda informada é válida retornando o seu valor."""
     while True:
         try:
-            currency = int(input(ask))
+            moeda = int(input(pergunta))
         except ValueError:
-            print("insert a valid currency")
+            print("Insira uma moeda válida")
         else:
-            return currency
+            return moeda
 
 
-def ckeking_money():
-    """Make sure you have enough money and pay it out, if necessary returning True or False"""
-    if payment < MENU[order]["cost"]:
-        print("sorry, that's not enough money. Money refunded.")
+def chegando_o_pagamento():
+    """Verifica se há dinheiro suficiente e troco necessário, caso contrário devolve o dinheiro
+    retornando Verdadeiro ou Falso com print"""
+    if pagamento < MENU[pedido]["custo"]:
+        print("Desculpe, dinheiro insuficiente. Dinheiro devolvido.")
         return False
     else:
-        print(f"Here is ${int((payment - MENU[order]['cost']) * 100) / 100} in change.")
-        print(f"Here is your {order} ☕. Enjoy!")
+        print(f"R${int((pagamento - MENU[pedido]['custo']) * 100) / 100:.2f} de troco.")
+        print(f"Aqui está o seu {pedido} ☕. Aproveite!")
         return True
 
 
-def report():
-    """Shows the remaining resources and the accumulated money"""
-    for name, remaining in resources.items():
-        if name != "coffee":
-            print(f"{name}: {remaining}ml")
+def relatorio():
+    """Mostra os recursos restantes e o dinheiro acumulado"""
+    for nome, restante in recursos.items():
+        if nome != "café":
+            print(f"{nome}: {restante}ml")
         else:
-            print(f"{name}: {remaining}g")
-    print(f"Money: ${money}")
+            print(f"{nome}: {restante}g")
+    print(f"Dinheiro: ${dinheiro}")
 
 
 # Main Program
-print("user guide: type 'report' to see resources or 'off' to Turn off")
-order = ''
-money = 0
-# TODO: 6. Keep the money received and the remaining resources and ask again what the customer wants
-while order != "off":
-    maked_order = False
-    while not maked_order:
-        change = 0
-        # TODO: 1. Asking what type of coffee the customer wants
-        order = str(input("What would you like? (espresso/latte/cappuccino): ")).strip().lower()
-        # TODO: 2. Check that there are enough resources to make the order and carry it out
-        if order == "espresso" or order == "latte" or order == "cappuccino":
-            maked_order = cheking_resources()
-            if maked_order:
-                # TODO: 4. Ask separately how many quarters, dimes, nickles and pennies.
-                quaters = validating_int_input("how many quaters? ")
-                dimes = validating_int_input("how many dimes? ")
-                nickles = validating_int_input("how many nickles? ")
-                pennies = validating_int_input("how many pennies? ")
-                # TODO: 5. Add it all up and check if you have enough money for the order
-                payment = (0.25 * quaters) + (0.10 * dimes) + (0.05 * nickles) + (0.01 * pennies)
-                maked_order = ckeking_money()
-                if maked_order:
-                    money += MENU[order]["cost"]
-                    using_resources()
-        # TODO: 3. Be able to show the remaining resources when "report" is typed
-        elif order == "report":
-            if resources["coffee"] == 100:
-                money = 0
-            report()
+print("Guia do usuário: digite 'relatório' para verificar os recursos ou 'desligar' para desligar")
+pedido = ""
+dinheiro = 0
+
+# TODO: 6. Guarde o dinheiro recebido e os recursos restantes e pergunte novamente o que o cliente deseja
+while pedido != "desligar":
+    fazer_o_pedido = False
+
+    while not fazer_o_pedido:
+        # TODO: 1. Perguntar que tipo de café o cliente quer
+        pedido = str(input("O que você gostaria? (espresso/latte/cappuccino): ")).strip().lower()
+
+        # TODO: 2. Verifique se há recursos suficientes para fazer o pedido e realizá-lo.
+        if pedido == "espresso" or pedido == "latte" or pedido == "cappuccino":
+            fazer_o_pedido = checando_recursos()
+            if fazer_o_pedido:
+
+                # TODO: 4. Pergunte separadamente quantas moedas.
+                centavos = verificador_de_entrada_int("Quantas moedas de R$ 0,10 centavos? ") * 0.10
+                centavos += verificador_de_entrada_int("Quantas moedas de R$ 0,25 centavos? ") * 0.25
+                centavos += verificador_de_entrada_int("Quantas moedas de R$ 0,50 centavos? ") * 0.50
+                real = verificador_de_entrada_int("Quantas moedas de R$ 1 real? ")
+
+                # TODO: 5. Adicione tudo e verifique se você tem dinheiro suficiente para o pedido.
+                pagamento = centavos + real
+                fazer_o_pedido = chegando_o_pagamento()
+                if fazer_o_pedido:
+                    dinheiro += MENU[pedido]["custo"]
+                    usando_recursos()
+
+        # TODO: 3. Ser capaz de mostrar os recursos restantes quando "relatório" for digitado.
+        elif pedido in "relatoriorelatório":
+            if recursos["café"] == 100:
+                dinheiro = 0
+            relatorio()
         else:
-            # TODO: 7. Turn off when "off" is typed
-            if order == "off":
+            # TODO: 7. Desligar quando "desligar" for digitado
+            if pedido in "desligar":
                 break
