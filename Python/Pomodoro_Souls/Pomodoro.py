@@ -14,19 +14,23 @@ while True:
     print(f"""{'Pomodoros Pré-definidos':^53}
 [1] - Curto: 25min ativo + 05min descanso, 2 Ciclos
       Tempo Total: 1h
-[2] - Padrão: 25min ativo + 05min descanso, 4 Ciclos 
+[2] - Curto-Estendido: 25min ativo + 05min descanso, 3 Ciclos
+      Tempo Total: 1h25m
+[3] - Padrão: 25min ativo + 05min descanso, 4 Ciclos 
       Tempo Total: 2h
-[3] - Personalizado""")
-    while predefinido not in "123":
+[4] - Personalizado""")
+    while predefinido not in "1234":
         try:
             predefinido = str(input("Faça sua escolha, esqueleto: ")).strip()[0]
-            if predefinido not in "123":
+            if predefinido not in "1234":
                 print("hm...")
         except IndexError:
             print("hm...")
     if predefinido == "1":
         ativo, descanso, ciclos = 25, 5, 2
     elif predefinido == "2":
+        ativo, descanso, ciclos = 25, 5, 3
+    elif predefinido == "3":
         ativo, descanso, ciclos = 25, 5, 4
     else:
         ativo = tratando_erros_int("Informe o Tempo ativo (em minutos): ")
